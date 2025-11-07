@@ -35,8 +35,11 @@ def check_card(message):
         try:
             last = str(Tele(cc))
         except:
-            last = 'Error while making payment'
+            last = 'API Error'
         print(last)
+
+        if "Payment processed successfully" in last:
+        	last = 'Card with funds🔥'
 
         time_taken = round(time.time() - start_time, 2)
 
