@@ -12,10 +12,10 @@ with open('token.txt', 'r') as token_file:
 
 bot = TeleBot(token, parse_mode="HTML") 
 
-@bot.message_handler(commands=['af'])
+@bot.message_handler(commands=['nd'])
 def check_card(message):
    try:
-        cc = message.text.split('/af', 1)[1].strip()
+        cc = message.text.split('/nd', 1)[1].strip()
         user_id = message.from_user.id
         username = message.from_user.username or "NoUsername"
 
