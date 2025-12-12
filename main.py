@@ -42,9 +42,9 @@ def check_card(message):
         print(last)
 
         if "AVS" in last:
-        	last = 'SUCCEEDED✅'
+        	last = 'SUCCEEDED ✅'
         else:
-            last = 'FAILED⚠'
+            last = 'FAILED ⚠'
 
         time_taken = round(time.time() - start_time, 2)
 
