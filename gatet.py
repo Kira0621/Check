@@ -54,6 +54,9 @@ def Tele(ccx):
 	}
 	
 	response = requests.post('https://jonnaschmidtmd.com/make-an-online-payment/', headers=headers, data=data)
-	
-	result = re.search(r'class="anpt_message anpt_error_message"><div>(.*?)</div></div>', response.text).group(1)
+
+	try:
+		result = re.search(r'class="anpt_message anpt_error_message"><div>(.*?)</div></div>', response.text).group(1)
+	except:
+		result = re.search(r'class="anpt_message anpt_success_message"><div>(.*?)</div></div>', response.text).group(1)
 	return result
