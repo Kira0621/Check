@@ -1,7 +1,11 @@
 import requests
+import random
 
 def send(cc, last, username, time_taken):
     ii = cc[:6]
+
+    random_amount1 = random.randint(1, 4)
+    random_amount2 = random.randint(1, 99)
 
     try:
         response = requests.get(f'https://bins.antipublic.cc/bins/{ii}')
@@ -21,9 +25,9 @@ def send(cc, last, username, time_taken):
         bank = emj = do = dicr = typ = 'Unknown'
 
     msg1 = f"""
-𝗚𝗔𝗧𝗘𝗪𝗔𝗬 ➜ Random Charge 💳
+𝗚𝗔𝗧𝗘𝗪𝗔𝗬 ➜ Will Be Charge ({random_amount1}.{random_amount2}$) 💳
 
-𝗥𝗘𝗦𝗣𝗢𝗡𝗦𝗘 ➜ {last}             
+𝗥𝗘𝗦𝗣𝗢𝗡𝗦𝗘 ➜ {last}     
 𝗖𝗖 ➜ <code>{cc}</code>       
 𝗕𝗜𝗡 ➜ {ii}                   
 𝗖𝗢𝗨𝗡𝗧𝗥𝗬 ➜ {do}               
