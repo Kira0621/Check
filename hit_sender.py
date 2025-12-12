@@ -4,15 +4,15 @@ def send(cc, last, username, time_taken):
     ii = cc[:6]
 
     try:
-        response = requests.get(f'https://web-production-71334.up.railway.app/bin-info?bin={ii}')
+        response = requests.get(f'https://bins.antipublic.cc/bins/{ii}')
         data = response.json()
 
         if response.status_code == 200:
-            bank = data.get("Bank name", "Unknown")
-            emj = data.get("Flag", "🏳️")
-            do = data.get("Country name", "Unknown")
-            dicr = data.get("Brand", "Unknown")
-            typ = data.get("Type", "Unknown")
+            bank = data.get("bank", "Unknown")
+            emj = data.get("country_flag", "🏳️")
+            do = data.get("country", "Unknown")
+            dicr = data.get("brand", "Unknown")
+            typ = data.get("type", "Unknown")
         else:
             print(f"API Error: {data.get('error', 'Unknown error')}")
             bank = emj = do = dicr = typ = 'Unknown'
