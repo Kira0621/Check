@@ -25,7 +25,7 @@ def send(cc, last, username, time_taken):
         bank = emj = do = dicr = typ = 'Unknown'
 
     msg1 = f"""
-𝗚𝗔𝗧𝗘𝗪𝗔𝗬 ➜ Will Be Charge ({random_amount1}.{random_amount2}$) 💳
+𝗚𝗔𝗧𝗘𝗪𝗔𝗬 ➜ Will Be Charge {random_amount1}.{random_amount2}$ 💳
 
 𝗥𝗘𝗦𝗣𝗢𝗡𝗦𝗘 ➜ {last}     
 𝗖𝗖 ➜ <code>{cc}</code>       
