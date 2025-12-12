@@ -41,12 +41,16 @@ def check_card(message):
             last = 'API Error'
         print(last)
 
-        if "AVS" in last:
-        	last = 'SUCCEEDED ✅'
-        elif "Thank you" in last:
-            last = 'CHARGED $1.00 🔥'
+        if "succeeded" in last:
+        	last = 'Charged 🔥'
+        elif "Your card does not support this type of purchase" in last:
+            last = 'Your card does not support this type of purchase'
+        elif "security code is incorrect" in last or "security code is invalid" in last:
+            last = 'security code is incorrect/invalid'
+        elif "insufficient funds" in last:
+            last = 'INSUFFICIENT_FUNDS 🍃'
         else:
-            last = 'FAILED ⚠'
+            last = 'Declined ⚠'
 
         time_taken = round(time.time() - start_time, 2)
 
