@@ -43,6 +43,8 @@ def check_card(message):
 
         if "AVS" in last:
         	last = 'SUCCEEDED ✅'
+        if "Thank you" in last:
+            last = 'CHARGED $1.00 🔥'
         else:
             last = 'FAILED ⚠'
 
