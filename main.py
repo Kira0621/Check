@@ -11,11 +11,14 @@ with open('token.txt', 'r') as token_file:
     token = token_file.read().strip()
 
 bot = TeleBot(token, parse_mode="HTML") 
+@bot.message_handler(commands=["start"])
+def start(message):
+    bot.reply_to(message,"/chk n|mm|yy|cvc (Visa/Mastercard)")
 
-@bot.message_handler(commands=['nd'])
+@bot.message_handler(commands=['chk'])
 def check_card(message):
    try:
-        cc = message.text.split('/nd', 1)[1].strip()
+        cc = message.text.split('/chk', 1)[1].strip()
         user_id = message.from_user.id
         username = message.from_user.username or "NoUsername"
 
@@ -38,8 +41,10 @@ def check_card(message):
             last = 'API Error'
         print(last)
 
-        if "Payment processed successfully" in last:
-        	last = 'Card with funds🔥'
+        if "AVS" in last:
+        	last = 'SUCCEEDED✅'
+        else:
+            last = 'FAILED⚠'
 
         time_taken = round(time.time() - start_time, 2)
 
