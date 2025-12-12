@@ -21,7 +21,7 @@ def send(cc, last, username, time_taken):
         bank = emj = do = dicr = typ = 'Unknown'
 
     msg1 = f"""
-𝗚𝗔𝗧𝗘𝗪𝗔𝗬 ➜ Nendou 🤡        
+𝗚𝗔𝗧𝗘𝗪𝗔𝗬 ➜ STATUS CHECK 💳
 
 𝗥𝗘𝗦𝗣𝗢𝗡𝗦𝗘 ➜ {last}             
 𝗖𝗖 ➜ <code>{cc}</code>       
@@ -31,7 +31,7 @@ def send(cc, last, username, time_taken):
 𝗙𝗟𝗔𝗚 ➜ {emj}                 
 
 Check by @{username}
-𝗕𝗼𝘁 𝗯𝘆: @strawhatchannel96
+𝗕𝗼𝘁 𝗯𝘆: @shumyathtay
 """
     return msg1
 
