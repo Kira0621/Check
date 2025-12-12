@@ -21,7 +21,7 @@ def send(cc, last, username, time_taken):
         bank = emj = do = dicr = typ = 'Unknown'
 
     msg1 = f"""
-𝗚𝗔𝗧𝗘𝗪𝗔𝗬 ➜ STATUS CHECK 💳
+𝗚𝗔𝗧𝗘𝗪𝗔𝗬 ➜ Random Charge 💳
 
 𝗥𝗘𝗦𝗣𝗢𝗡𝗦𝗘 ➜ {last}             
 𝗖𝗖 ➜ <code>{cc}</code>       
